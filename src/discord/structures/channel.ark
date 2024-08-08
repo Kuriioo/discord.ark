@@ -1,0 +1,34 @@
+# File    channel.ark
+# Author  Kurio
+
+(let _Channel (fun () {
+  (let cache [])
+
+  (fun (
+    &cache 
+  ) ()) 
+}))
+
+(let Channel (fun () {
+  (let id "")
+  (let messages [])
+
+  (let send_message (fun (_msg) {
+    #TODO: Send a message
+    (print _msg)
+  })) 
+
+  (let new (fun (_id) {
+    (set id _id)
+  }))
+
+  (fun (
+    ### Fields ###
+    &id
+    &messages
+
+    ### Methods ###
+    &new
+    &send_message)
+  ())
+}))

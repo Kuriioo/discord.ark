@@ -1,0 +1,25 @@
+# File    guild.ark
+# Author  Kurio
+
+(import discord.structures.channel)
+(import discord.collection)
+
+(let _Guild (fun () {
+  (let cache (Collection))
+
+  (fun (
+    &cache
+  ) ())
+}))
+
+(let Guild (fun () {
+  (let channels (Collection))
+  (let id "")
+  (mut members [])
+
+  (let new (fun (_id) {
+    (set id _id)
+  }))
+
+  (fun (&channels &id &members &new) ())
+}))

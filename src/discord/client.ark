@@ -1,0 +1,74 @@
+# File    client.ark
+# Author  Kurio
+
+(import http)
+
+(import discord.structures.guild)
+(import discord.structures.channel)
+(import discord.structures.user)
+(import discord.collection)
+
+(let Client (fun () {
+  (let guilds (Collection))
+  (let user nil)
+
+  ### Callbacks ###
+  (let _loggedinCallback nil)
+  (let _messageCreatedCallback nil)
+
+  (let on (fun (_identifier _callback) {
+    (if (= _identifier "login") {
+      (set _loggedinCallback _callback)
+    }(if (= _identifier "messageCreate") {
+      (set _messageCreatedCallback _callback)
+    }))
+  }))  
+
+  (let login (fun (_token) {
+    (let req (http:client:create "https://discord.com/api" 80))
+
+    (let headers (http:headers:create
+      "authorization" (+ "Bot " _token)
+      "Content-Type" "application/json"
+    ))
+    
+    #(let params (http:params:create
+    #  "content" "test message"
+    #))
+
+    # TODO: Once logged in fetch all guilds
+
+    #(mut output (http:client:post req "/v10/channels/1130510263913824320/messages" "body: {\"content\": \"test message\"}" "text/plain" headers))
+    #(if (nil? output) {
+    #  (print (@ output 0))
+    #}{
+    #  (print "output nil")
+    #})
+
+    ## TODO: Add all guilds into cache
+    (let guild (Guild))
+    (guild.new "1130510263913824317")
+    
+    (let channel (Channel))
+    (channel.new "1130510263913824320")
+    (guild.channels.add channel)
+    (guilds.add guild) 
+    
+    (set user (User))
+
+    (if (!= _loggedinCallback nil) {
+      (_loggedinCallback)
+    })
+  }))
+
+  (fun (
+    # Fields 
+    &_loggedinCallback 
+    &guilds
+    &user
+
+    ### Methods ###
+    &login
+    &on
+  ) ())
+}))

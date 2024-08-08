@@ -1,0 +1,13 @@
+# File    user.ark
+# Author  Kurio
+
+(let User (fun () {
+  (let id 291875175)
+  (let name "Test")
+  
+  (fun (
+    ### Fields ###
+    &id 
+    &name
+  ) ())
+}))

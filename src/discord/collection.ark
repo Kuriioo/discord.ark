@@ -1,0 +1,44 @@
+(let Collection (fun () {
+  (let cache [])
+
+  (let has (fun (_id) {
+    (mut index 0)
+    (mut output false)
+    (while (< index (len cache)) {
+      (if (= _id (@ cache index)) {
+        (set output true)
+      })
+      (set index (+ 1 index))
+    })
+    output
+  }))
+
+  (let add (fun (_item) {
+    (if (= (has _item.id) false) {
+      (set cache (append cache _item))
+    })
+  }))
+
+  (let get (fun (_id) {
+    (mut index 0)
+    (mut output nil)
+    (while (< index (len cache)) {
+      (let item (@ cache index))
+      (if (= _id item.id) {
+        (set output (@ cache index))
+      })
+      (set index (+ 1 index))
+    })
+    output
+  }))
+
+  (fun (
+    ### Fields ###
+    &cache
+
+    ### Methods ###
+    &has
+    &add
+    &get
+  ) ())
+}))

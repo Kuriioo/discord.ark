@@ -1,0 +1,13 @@
+(import discord.client)
+
+(let client (Client))
+
+(client.on "login" (fun () {
+  (let guild (client.guilds.get "1130510263913824317"))
+  (let channel (guild.channels.get "1130510263913824320"))
+  
+  (print "Logged in as " client.user.id)
+  (channel.send_message "Test Message")
+}))
+
+(client.login "TOKEN")
